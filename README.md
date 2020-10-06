@@ -52,9 +52,9 @@ Riddhi Gupta
 <img src = "https://avatars2.githubusercontent.com/u/43917576?s=460&u=b9ba679a93963e9dd0cc8b849dce4cfc26c4f24f&v=4" width="150" height="150" alt="Riddhi Gupta">
 </p>
 <p align="center">
-<a href = "https://github.com/RiddhiGupta5"><img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36"/></a>
+<a href = "https://github.com/RiddhiGupta5"><img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36"/ alt="GitHub"></a>
 <a href = "https://www.linkedin.com/in/riddhi-gupta-6a587017a">
-<img src = "http://www.iconninja.com/files/863/607/751/network-linkedin-social-connection-circular-circle-media-icon.svg" width="36" height="36"/>
+<img src = "http://www.iconninja.com/files/863/607/751/network-linkedin-social-connection-circular-circle-media-icon.svg" width="36" height="36" alt="LinkedIn"/>
 </a>
 </p>
 </td>
