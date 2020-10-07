@@ -20,25 +20,6 @@
 
 <br>
 
-## Instructions to run
-
-- Pre-requisites:
-
-  - < insert pre-requisite >
-  - < insert pre-requisite >
-
-- < directions to install >
-
-```bash
-< insert code >
-```
-
-- < directions to execute >
-
-```bash
-< insert code >
-```
-
 ## Contributors
 
 <table>
