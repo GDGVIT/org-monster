@@ -1,0 +1,10 @@
+{
+  "manifest_version": 2,
+  "name": "Org-Monster",
+  "version": "1.0",
+  "description": "A Chrome Extension that will help you follow GitHub Organisations",
+
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
+}
