@@ -1,6 +1,28 @@
-document.getElementById("submit").addEventListener("click", function () {
-  var orgName = document.getElementById("orgName").value;
+chrome.storage.sync.get(["org"], function (res) {
+  var temp = res.org;
+  for (i in temp) {
+    fetchActivities(temp[i]);
+  }
+});
 
+function saveOrg(orgName) {
+  chrome.storage.sync.get(["org"], function (res) {
+    var temp = res.org;
+    if (temp == undefined) {
+      temp = [orgName];
+      chrome.storage.sync.set({ org: temp }, function () {
+        document.getElementById("extra").innerHTML = temp;
+      });
+    } else if (!temp.includes(orgName)) {
+      temp = temp.concat(orgName);
+      chrome.storage.sync.set({ org: temp }, function () {
+        document.getElementById("extra").innerHTML = temp;
+      });
+    }
+  });
+}
+
+function fetchActivities(orgName) {
   fetch("https://api.github.com/orgs/" + orgName + "/events", {
     method: "GET",
     headers: {
@@ -13,6 +35,7 @@ document.getElementById("submit").addEventListener("click", function () {
     .then((activities) => {
       var i;
       var result = "";
+
       for (i = 0; i < activities.length; i++) {
         var activity = activities[i];
         console.log(activity);
@@ -38,6 +61,12 @@ document.getElementById("submit").addEventListener("click", function () {
           console.log("UNDEFINED");
         }
       }
+      saveOrg(orgName);
       document.getElementById("name").innerHTML = result;
     });
+}
+
+document.getElementById("submit").addEventListener("click", function () {
+  var orgName = document.getElementById("orgName").value;
+  fetchActivities(orgName);
 });
