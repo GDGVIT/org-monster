@@ -1,9 +1,11 @@
-chrome.storage.sync.get(["org"], function (res) {
-  var temp = res.org;
-  for (i in temp) {
-    fetchActivities(temp[i]);
-  }
-});
+allActivities = [];
+
+// chrome.storage.sync.get(["org"], function (res) {
+//   var temp = res.org;
+//   for (i in temp) {
+//     fetchActivities(temp[i]);
+//   }
+// });
 
 function saveOrg(orgName) {
   chrome.storage.sync.get(["org"], function (res) {
@@ -38,35 +40,40 @@ function fetchActivities(orgName) {
 
       for (i = 0; i < activities.length; i++) {
         var activity = activities[i];
-        console.log(activity);
         var type = activity["type"];
-        console.log(type);
-        console.log(activity["repo"]["name"]);
-        console.log(activity["actor"]["display_login"]);
-        console.log(activity["org"]["login"]);
+        var actObj = {
+          type: activity["type"],
+          repoName: activity["repo"]["name"],
+          actorName: activity["actor"]["display_login"],
+          orgName: activity["org"]["login"],
+        };
+
         result += type + "<br/>";
         if (type == "PushEvent") {
-          console.log(activity["payload"]["commits"].length);
+          actObj.commits = activity["payload"]["commits"].length;
         } else if (type == "PullRequestEvent") {
-          console.log(activity["payload"]["number"]);
-          console.log(activity["payload"]["pull_request"]["title"]);
+          actObj.prAction = activity["payload"]["action"];
+          actObj.prNo = activity["payload"]["number"];
+          actObj.prTitle = activity["payload"]["pull_request"]["title"];
         } else if (type == "ForkEvent") {
-          console.log(activity["payload"]["forkee"]);
-        } else if (
-          type == "IssueCommentEvent" ||
-          type == "PullRequestReviewEvent"
-        ) {
-          console.log("Dont show");
-        } else {
-          console.log("UNDEFINED");
+          actObj.forkee = activity["payload"]["forkee"];
         }
       }
-      saveOrg(orgName);
-      document.getElementById("name").innerHTML = result;
+
+      // TODO
+      // CreateEvent;
+      // DeleteEvent;
+      // IssuesEvent;
+      // PublicEvent;
+
+      showActivityList();
     });
 }
 
+// TODO
+function showActivityList() {}
+
 document.getElementById("submit").addEventListener("click", function () {
   var orgName = document.getElementById("orgName").value;
-  fetchActivities(orgName);
+  saveOrg(orgName);
 });

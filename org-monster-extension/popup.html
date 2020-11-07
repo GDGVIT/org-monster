@@ -3,18 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>View Feed</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h2>Org Monster</h2>
-    <input type="text" placeholder="organisation name" id="orgName">
-    <button type="submit" id="submit">Submit</button>
-    <p id="name"></p>
-    <p id="extra"></p>
-    <script src="popup.js"></script>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item custom-tab">
+            <a class="nav-link active" href="popup.html">Your Feed</a>
+        </li>
+        <li class="nav-item custom-tab">
+            <a class="nav-link" href="manage.html">Manage Orgs</a>
+        </li>
+    </ul>
+
+    <div class="container">
+        <h2>Org Monster</h2>
+        <input type="text" placeholder="organisation name" id="orgName">
+        <button type="submit" id="submit">Submit</button>
+        <p id="name"></p>
+        <p id="extra"></p>
+        <script src="popup.js"></script>
+    </div>
 </body>
 
 </html>

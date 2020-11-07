@@ -1,5 +1,54 @@
-body {
-  color: red;
+body,
+html {
+  width: 320px;
+  padding: 0px;
+  margin: 0px;
+  scroll-behavior: smooth;
+}
+
+.container {
+  padding-bottom: 20px;
+}
+
+.custom-tab {
+  width: 160px;
+  text-align: center;
+}
+
+.org-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.org-tag {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  margin-top: 8px;
+  background-color: #f6f6f6;
+  padding: 5px 4px 5px 8px;
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.org-tag:hover {
+  background-color: #eee;
+}
+
+.close {
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 2px 4px;
+  font-weight: 900;
+}
+
+.tag-text {
+  padding-right: 4px;
+}
+
+.close:hover {
+  background: #bbb;
 }
 
 #extra {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Manage Orgs</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item custom-tab">
+            <a class="nav-link" href="popup.html">Your Feed</a>
+        </li>
+        <li class="nav-item custom-tab">
+            <a class="nav-link active" href="manage.html">Manage Orgs</a>
+        </li>
+    </ul>
+
+    <div class="container mt-3">
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Your Email" id="mail" name="email">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit">+</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container" id="orgsList">
+        <ul class="org-list">
+            <li class="org-tag"><span class="tag-text">Agnes</span><span class="close">&times;</span></li>
+            <li class="org-tag"><span class="tag-text">Billy</span><span class="close">&times;</span></li>
+            <li class="org-tag"><span class="tag-text">Bob</span><span class="close">&times;</span></li>
+            <li class="org-tag"><span class="tag-text">Calvin</span><span class="close">&times;</span></li>
+            <li class="org-tag"><span class="tag-text">Christina</span><span class="close">&times;</span></li>
+        </ul>
+    </div>
+
+    <script src="manage-orgs.js"></script>
+
+</body>
+
+</html>
