@@ -1,6 +1,6 @@
 body,
 html {
-  width: 320px;
+  width: 340px;
   padding: 0px;
   margin: 0px;
   scroll-behavior: smooth;
@@ -11,7 +11,12 @@ html {
 }
 
 .custom-tab {
-  width: 160px;
+  width: 170px;
+  text-align: center;
+}
+
+.heading {
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -32,10 +37,10 @@ html {
   margin-top: 8px;
   margin-right: 6px;
   background-color: #f6f6f6;
-  padding: 5px 4px 5px 8px;
+  padding: 5px 5px 10px 10px;
   text-decoration: none;
   color: black;
-  display: inline-block;
+  display: block;
 }
 
 .org-tag:hover {
@@ -45,7 +50,7 @@ html {
 .close {
   cursor: pointer;
   border-radius: 20px;
-  padding: 2px 4px;
+  padding: 2px 5px;
   font-weight: 900;
 }
 
@@ -55,6 +60,20 @@ html {
 
 .close:hover {
   background: #bbb;
+}
+
+.activity-box {
+  border: 1px solid #757575;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f9fbfc;
+  margin: 10px;
+  font-size: 14px;
+}
+
+.time {
+  font-size: 11px;
+  color: #757575;
 }
 
 #extra {

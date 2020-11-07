@@ -1,6 +1,15 @@
 var totalTags = 0;
 var allOrgs = [];
 
+// Press Enter to Submit
+document.getElementById("orgName").addEventListener("keyup", function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("addOrg").click();
+  }
+});
+
+// Adding Eventlistener to add Org Button
 document.getElementById("addOrg").addEventListener("click", function () {
   var orgName = document.getElementById("orgName").value;
   document.getElementById("orgName").value = "";
@@ -14,6 +23,7 @@ document.getElementById("addOrg").addEventListener("click", function () {
   }
 });
 
+// Getting all the stored orgs
 chrome.storage.sync.get(["org"], function (res) {
   var orgs = res.org;
   for (i in orgs) {
@@ -26,6 +36,9 @@ chrome.storage.sync.get(["org"], function (res) {
   }
 });
 
+// FUNCTION DEFINITIONS
+
+// Adding Closing action to cross buttons
 function addcloseEventListener() {
   var closebtns = document.getElementsByClassName("close");
   var i;
@@ -48,6 +61,7 @@ function addcloseEventListener() {
   }
 }
 
+// Save Organisation to storage
 function saveOrg(orgName) {
   chrome.storage.sync.get(["org"], function (res) {
     var storedOrgs = res.org;
@@ -65,6 +79,7 @@ function saveOrg(orgName) {
   });
 }
 
+// A utility function for Storage
 function utilityStore(orgs, orgName) {
   chrome.storage.sync.set({ org: orgs }, function () {
     addTag(orgName);
@@ -72,6 +87,7 @@ function utilityStore(orgs, orgName) {
   });
 }
 
+// Adding Tags
 function addTag(orgName) {
   var orgsList = document.getElementById("orgsList");
   orgsList.innerHTML += `<li class="org-tag"><span class="tag-text">${orgName}</span><span class="close">&times;</span></li>`;
@@ -79,6 +95,7 @@ function addTag(orgName) {
   totalTags += 1;
 }
 
+// Fading Effect
 function fadeOutEffect(fadeTarget) {
   var fadeEffect = setInterval(function () {
     if (!fadeTarget.style.opacity) {
