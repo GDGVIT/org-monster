@@ -20,25 +20,20 @@
     </ul>
 
     <div class="container mt-3">
-        <form>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Your Email" id="mail" name="email">
-                <div class="input-group-append">
-                    <button class="btn btn-success" type="submit">+</button>
-                </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter Organisation Name" id="orgName" name="orgName">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit" id="addOrg">+</button>
             </div>
-        </form>
+        </div>
     </div>
 
-    <div class="container" id="orgsList">
-        <ul class="org-list">
-            <li class="org-tag"><span class="tag-text">Agnes</span><span class="close">&times;</span></li>
-            <li class="org-tag"><span class="tag-text">Billy</span><span class="close">&times;</span></li>
-            <li class="org-tag"><span class="tag-text">Bob</span><span class="close">&times;</span></li>
-            <li class="org-tag"><span class="tag-text">Calvin</span><span class="close">&times;</span></li>
-            <li class="org-tag"><span class="tag-text">Christina</span><span class="close">&times;</span></li>
-        </ul>
+    <div class="container">
+        <div id="emptyMsg"></div>
+        <ul class="org-list" id="orgsList"></ul>
     </div>
+
+    <p id="extra"></p>
 
     <script src="manage-orgs.js"></script>
 

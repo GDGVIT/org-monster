@@ -21,10 +21,16 @@ html {
   margin: 0;
 }
 
+#emptyMsg {
+  color: #bbb;
+  text-align: center;
+}
+
 .org-tag {
   border: 1px solid #ddd;
   border-radius: 15px;
   margin-top: 8px;
+  margin-right: 6px;
   background-color: #f6f6f6;
   padding: 5px 4px 5px 8px;
   text-decoration: none;
