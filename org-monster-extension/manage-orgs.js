@@ -16,10 +16,16 @@ document.getElementById("addOrg").addEventListener("click", function () {
   if (orgName == "") {
     document.getElementById("orgName").focus();
   } else {
-    if (totalTags == 0) {
-      document.getElementById("emptyMsg").innerHTML = "";
+    if (/^[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]$/.test(orgName)) {
+      if (totalTags == 0) {
+        document.getElementById("emptyMsg").innerHTML = "";
+      }
+      saveOrg(orgName);
+    } else {
+      var errorMsg = document.getElementById("emptyMsg");
+      errorMsg.innerHTML = "Invalid Organisation Name";
+      fadeOutEffect(errorMsg);
     }
-    saveOrg(orgName);
   }
 });
 
@@ -105,7 +111,13 @@ function fadeOutEffect(fadeTarget) {
       fadeTarget.style.opacity -= 0.1;
     } else {
       clearInterval(fadeEffect);
-      fadeTarget.innerHTML = "";
+      fadeTarget.style.opacity = 1;
+      if (totalTags == 0) {
+        fadeTarget.innerHTML =
+          "Click on + to follow GitHub Organisations! <br/>";
+      } else {
+        fadeTarget.innerHTML = "";
+      }
     }
   }, 200);
 }
