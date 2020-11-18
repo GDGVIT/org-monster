@@ -33,11 +33,7 @@ function fetchActivities(orgName) {
         var activity = activities[i];
         var type = activity["type"];
 
-        if (
-          type == "WatchEvent" ||
-          type == "IssueCommentEvent" ||
-          type == "PullRequestReviewCommentEvent"
-        ) {
+        if (type == "WatchEvent") {
           continue;
         } else if (
           !(
@@ -46,7 +42,9 @@ function fetchActivities(orgName) {
             type == "ForkEvent" ||
             type == "CreateEvent" ||
             type == "IssuesEvent" ||
-            type == "DeleteEvent"
+            type == "DeleteEvent" ||
+            type == "IssueCommentEvent" ||
+            type == "PullRequestReviewCommentEvent"
           )
         ) {
           // console.log(activity);
@@ -58,6 +56,7 @@ function fetchActivities(orgName) {
           repoName: activity["repo"]["name"],
           actorName: activity["actor"]["display_login"],
           orgName: activity["org"]["login"],
+          repoUrl: "https://github.com/" + activity["repo"]["name"],
         };
 
         if (activity["updated_at"] == undefined) {
@@ -72,14 +71,28 @@ function fetchActivities(orgName) {
           actObj.prAction = activity["payload"]["action"];
           actObj.prNo = activity["payload"]["number"];
           actObj.prTitle = activity["payload"]["pull_request"]["title"];
+          actObj.url = activity["payload"]["pull_request"]["html_url"];
         } else if (type == "ForkEvent") {
           actObj.forkee = activity["payload"]["forkee"];
+          actObj.url = activity["payload"]["forkee"]["html_url"];
         } else if (type == "CreateEvent") {
           actObj.create_ref = activity["payload"]["ref_type"];
         } else if (type == "IssuesEvent") {
           actObj.issue_action = activity["payload"]["action"];
+          actObj.issueNo = activity["payload"]["issue"]["number"];
+          actObj.url = activity["payload"]["issue"]["html_url"];
         } else if (type == "DeleteEvent") {
           actObj.delete_ref = activity["payload"]["ref_type"];
+        } else if (type == "IssueCommentEvent") {
+          actObj.issue_comment_action = activity["payload"]["action"];
+          actObj.issueNo = activity["payload"]["issue"]["number"];
+          actObj.url = activity["payload"]["comment"]["html_url"];
+          actObj.issueUrl = activity["payload"]["issue"]["html_url"];
+        } else if (type == "PullRequestReviewCommentEvent") {
+          actObj.pr_comment_action = activity["payload"]["action"];
+          actObj.prNo = activity["payload"]["pull_request"]["number"];
+          actObj.prUrl = activity["payload"]["pull_request"]["html_url"];
+          actObj.url = activity["payload"]["comment"]["html_url"];
         }
         allActivities.push(actObj);
       }
@@ -102,37 +115,65 @@ function showActivityList() {
 
     if (activity.type == "PushEvent") {
       content = `
-        ${activity.actorName} pushed  ${activity.commits} commit to ${
-        activity.repoName
-      } <br/>
+        ${activity.actorName} pushed  ${activity.commits} commit to <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
     } else if (activity.type == "PullRequestEvent") {
       content = `
-        ${activity.actorName} ${activity.prAction} a pull request #${
-        activity.prNo
-      } in ${activity.repoName} <br/>
+        ${activity.actorName} ${activity.prAction} a pull request <a href="${
+        activity.url
+      }" target="_blank" >#${activity.prNo}</a> in <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
     } else if (activity.type == "ForkEvent") {
       content = `
-        ${activity.actorName} forked ${activity.repoName} <br/>
+        ${activity.actorName} <a href="${
+        activity.url
+      }" target="_blank" >forked</a> <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
     } else if (activity.type == "CreateEvent") {
       content = `
-        ${activity.actorName} created ${activity.create_ref} in ${
-        activity.repoName
-      } <br/>
+        ${activity.actorName} created ${activity.create_ref} in <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
     } else if (activity.type == "IssuesEvent") {
       content = `
-        ${activity.actorName} ${activity.issue_action} issue in ${
-        activity.repoName
-      } <br/>
+        ${activity.actorName} ${activity.issue_action} issue <a href="${
+        activity.url
+      }" target="_blank" >#${activity.issueNo}</a> in <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
     } else if (activity.type == "DeleteEvent") {
       content = `
-        ${activity.actorName} removed ${activity.delete_ref} in ${
-        activity.repoName
-      } <br/>
+        ${activity.actorName} removed ${activity.delete_ref} in <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
+        <span class="time">${findTime(activity.timestamp)}</span>`;
+    } else if (activity.type == "IssueCommentEvent") {
+      content = `
+        ${activity.actorName} ${activity.issue_comment_action} a <a href="${
+        activity.url
+      }" target="_blank" >comment</a> on issue <a href="${
+        activity.issueUrl
+      }" target="_blank" >#${activity.issueNo}</a> in <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
+        <span class="time">${findTime(activity.timestamp)}</span>`;
+    } else if (activity.type == "PullRequestReviewCommentEvent") {
+      content = `
+        ${activity.actorName} ${activity.pr_comment_action} a <a href="${
+        activity.url
+      }" target="_blank" >comment</a> on pull request <a href="${
+        activity.prUrl
+      }" target="_blank" >#${activity.prNo}</a> in <a href="${
+        activity.repoUrl
+      }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
     }
 
