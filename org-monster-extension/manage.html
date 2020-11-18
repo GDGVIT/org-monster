@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Manage Orgs</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item custom-tab">
+            <a class="nav-link" href="popup.html">Your Feed</a>
+        </li>
+        <li class="nav-item custom-tab">
+            <a class="nav-link active" href="manage.html">Manage Orgs</a>
+        </li>
+    </ul>
+
+    <div class="container mt-3">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter Organisation Name" id="orgName" name="orgName"
+                autocomplete="off">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit" id="addOrg">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="emptyMsg"></div>
+        <ul class="org-list" id="orgsList"></ul>
+    </div>
+
+    <script src="manage-orgs.js"></script>
+
+</body>
+
+</html>
