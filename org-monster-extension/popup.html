@@ -10,24 +10,29 @@
 
 <body>
 
+    <div>
+        <img src="Logo.svg" alt="org monster" class="logo">
+    </div>
+
     <ul class="nav nav-tabs">
         <li class="nav-item custom-tab">
-            <a class="nav-link active" href="popup.html">Your Feed</a>
+            <a class="nav-link active border border-bottom-0" href="popup.html">Your Feed</a>
         </li>
         <li class="nav-item custom-tab">
-            <a class="nav-link" href="manage.html">Manage Orgs</a>
+            <a class="nav-link border non-active" href="manage.html">Manage Orgs</a>
         </li>
     </ul>
-
-    <div>
-        <div class="heading">
-            <h4>Org Monster</h4>
+    <div class="outer-div">
+        <div class="tab-body">
+            <div class="heading">
+                <h4>Org Monster</h4>
+            </div>
+            <hr>
+            <div id="activites" class="container">
+                <div id="emptyMsg"></div>
+            </div>
+            <script src="popup.js"></script>
         </div>
-        <hr>
-        <div id="activites" class="container">
-            <div id="emptyMsg"></div>
-        </div>
-        <script src="popup.js"></script>
     </div>
 </body>
 

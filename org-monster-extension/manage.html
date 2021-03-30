@@ -10,28 +10,36 @@
 
 <body>
 
-    <ul class="nav nav-tabs">
-        <li class="nav-item custom-tab">
-            <a class="nav-link" href="popup.html">Your Feed</a>
-        </li>
-        <li class="nav-item custom-tab">
-            <a class="nav-link active" href="manage.html">Manage Orgs</a>
-        </li>
-    </ul>
-
-    <div class="container mt-3">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Enter Organisation Name" id="orgName" name="orgName"
-                autocomplete="off">
-            <div class="input-group-append">
-                <button class="btn btn-success" type="submit" id="addOrg">+</button>
-            </div>
-        </div>
+    <div>
+        <img src="Logo.svg" alt="org monster" class="logo">
     </div>
 
-    <div class="container">
-        <div id="emptyMsg"></div>
-        <ul class="org-list" id="orgsList"></ul>
+    <ul class="nav nav-tabs">
+        <li class="nav-item custom-tab">
+            <a class="nav-link border non-active" href="popup.html">Your Feed</a>
+        </li>
+        <li class="nav-item custom-tab">
+            <a class="nav-link active border border-bottom-0" href="manage.html">Manage Orgs</a>
+        </li>
+    </ul>
+    <div class="outer-div">
+        <div class="tab-body">
+            <div class="container mt-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter Organisation Name" id="orgName"
+                        name="orgName" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="submit" id="addOrg">+</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container">
+                <div id="emptyMsg"></div>
+                <ul class="org-list" id="orgsList"></ul>
+            </div>
+        </div>
     </div>
 
     <script src="manage-orgs.js"></script>
