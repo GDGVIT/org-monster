@@ -1,5 +1,4 @@
 var allActivities = [];
-var displayActivities = [];
 var filterValues = {
   PushEvent: true,
   PullRequestEvent: true,
@@ -23,12 +22,12 @@ chrome.storage.sync.get(["org"], function (res) {
     var orgfilter = document.getElementsByClassName("org-filter")[0];
     for (i in temp) {
       fetchActivities(temp[i]);
+      filterValues[temp[i].toLowerCase()] = true;
       var content = `<label class="checkbox-container">${temp[i]}
       <input type="checkbox" checked="checked" value="${temp[i]}" class="option">
       <span class="checkmark"></span>
       </label>`;
       orgfilter.innerHTML += content;
-      filterValues[temp[i]] = true;
     }
   }
 });
@@ -128,9 +127,6 @@ function fetchActivities(orgName) {
         }
         allActivities.push(actObj);
       }
-
-      displayActivities = allActivities;
-
       showActivityList();
     });
 }
@@ -139,79 +135,84 @@ function fetchActivities(orgName) {
 function showActivityList() {
   var activityDiv = document.getElementById("activites");
   activityDiv.innerHTML = "";
-  displayActivities.sort(function (a, b) {
+  allActivities.sort(function (a, b) {
     return b.timestamp - a.timestamp;
   });
 
-  for (i in displayActivities) {
-    activity = displayActivities[i];
-    content = "";
+  for (i in allActivities) {
+    activity = allActivities[i];
+    if (
+      filterValues[activity.type] &&
+      filterValues[activity.orgName.toLowerCase()]
+    ) {
+      content = "";
 
-    if (activity.type == "PushEvent") {
-      content = `
+      if (activity.type == "PushEvent") {
+        content = `
         ${activity.actorName} pushed  ${activity.commits} commit to <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    } else if (activity.type == "PullRequestEvent") {
-      content = `
+      } else if (activity.type == "PullRequestEvent") {
+        content = `
         ${activity.actorName} ${activity.prAction} a pull request <a href="${
-        activity.url
-      }" target="_blank" >#${activity.prNo}</a> in <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.url
+        }" target="_blank" >#${activity.prNo}</a> in <a href="${
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    } else if (activity.type == "ForkEvent") {
-      content = `
+      } else if (activity.type == "ForkEvent") {
+        content = `
         ${activity.actorName} <a href="${
-        activity.url
-      }" target="_blank" >forked</a> <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.url
+        }" target="_blank" >forked</a> <a href="${
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    } else if (activity.type == "CreateEvent") {
-      content = `
+      } else if (activity.type == "CreateEvent") {
+        content = `
         ${activity.actorName} created ${activity.create_ref} in <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    } else if (activity.type == "IssuesEvent") {
-      content = `
+      } else if (activity.type == "IssuesEvent") {
+        content = `
         ${activity.actorName} ${activity.issue_action} issue <a href="${
-        activity.url
-      }" target="_blank" >#${activity.issueNo}</a> in <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.url
+        }" target="_blank" >#${activity.issueNo}</a> in <a href="${
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    } else if (activity.type == "DeleteEvent") {
-      content = `
+      } else if (activity.type == "DeleteEvent") {
+        content = `
         ${activity.actorName} removed ${activity.delete_ref} in <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    } else if (activity.type == "IssueCommentEvent") {
-      content = `
+      } else if (activity.type == "IssueCommentEvent") {
+        content = `
         ${activity.actorName} ${activity.issue_comment_action} a <a href="${
-        activity.url
-      }" target="_blank" >comment</a> on issue <a href="${
-        activity.issueUrl
-      }" target="_blank" >#${activity.issueNo}</a> in <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.url
+        }" target="_blank" >comment</a> on issue <a href="${
+          activity.issueUrl
+        }" target="_blank" >#${activity.issueNo}</a> in <a href="${
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    } else if (activity.type == "PullRequestReviewCommentEvent") {
-      content = `
+      } else if (activity.type == "PullRequestReviewCommentEvent") {
+        content = `
         ${activity.actorName} ${activity.pr_comment_action} a <a href="${
-        activity.url
-      }" target="_blank" >comment</a> on pull request <a href="${
-        activity.prUrl
-      }" target="_blank" >#${activity.prNo}</a> in <a href="${
-        activity.repoUrl
-      }" target="_blank" >${activity.repoName}</a> <br/>
+          activity.url
+        }" target="_blank" >comment</a> on pull request <a href="${
+          activity.prUrl
+        }" target="_blank" >#${activity.prNo}</a> in <a href="${
+          activity.repoUrl
+        }" target="_blank" >${activity.repoName}</a> <br/>
         <span class="time">${findTime(activity.timestamp)}</span>`;
-    }
+      }
 
-    activityDiv.innerHTML += `<div class="activity-box">${content}</div>`;
+      activityDiv.innerHTML += `<div class="activity-box">${content}</div>`;
+    }
   }
 }
 
@@ -242,4 +243,5 @@ function filterActivities() {
     filterValues[filter.value] = filter.checked;
   }
   console.log(filterValues);
+  showActivityList();
 }
