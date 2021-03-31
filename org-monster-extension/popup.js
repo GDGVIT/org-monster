@@ -1,16 +1,35 @@
 var allActivities = [];
-var filterValues = {};
+var displayActivities = [];
+var filterValues = {
+  PushEvent: true,
+  PullRequestEvent: true,
+  ForkEvent: true,
+  CreateEvent: true,
+  IssuesEvent: true,
+  DeleteEvent: true,
+  IssueCommentEvent: true,
+  PullRequestReviewCommentEvent: true,
+};
 
 // Getting all Stored Organisations
 chrome.storage.sync.get(["org"], function (res) {
   var temp = res.org;
   if (temp == undefined || temp.length == 0) {
+    document.getElementById("filter-section").style.visibility = "hidden";
     document.getElementById("emptyMsg").innerHTML =
       "Follow GitHub Organisations <br/>Add Organisations in Manage Section!";
-  }
-
-  for (i in temp) {
-    fetchActivities(temp[i]);
+  } else {
+    document.getElementById("filter-section").style.visibility = "visible";
+    var orgfilter = document.getElementsByClassName("org-filter")[0];
+    for (i in temp) {
+      fetchActivities(temp[i]);
+      var content = `<label class="checkbox-container">${temp[i]}
+      <input type="checkbox" checked="checked" value="${temp[i]}" class="option">
+      <span class="checkmark"></span>
+      </label>`;
+      orgfilter.innerHTML += content;
+      filterValues[temp[i]] = true;
+    }
   }
 });
 
@@ -23,15 +42,8 @@ acc[0].addEventListener("click", function () {
   } else {
     panel.style.maxHeight = panel.scrollHeight + "px";
   }
+  filterActivities();
 });
-
-function send() {
-  var filterData = document.getElementsByClassName("option");
-  for (filter of filterData) {
-    filterValues[filter.value] = filter.checked;
-  }
-  console.log(filterValues);
-}
 
 // FUNCTION DEFINITIONS
 
@@ -117,6 +129,8 @@ function fetchActivities(orgName) {
         allActivities.push(actObj);
       }
 
+      displayActivities = allActivities;
+
       showActivityList();
     });
 }
@@ -125,12 +139,12 @@ function fetchActivities(orgName) {
 function showActivityList() {
   var activityDiv = document.getElementById("activites");
   activityDiv.innerHTML = "";
-  allActivities.sort(function (a, b) {
+  displayActivities.sort(function (a, b) {
     return b.timestamp - a.timestamp;
   });
 
-  for (i in allActivities) {
-    activity = allActivities[i];
+  for (i in displayActivities) {
+    activity = displayActivities[i];
     content = "";
 
     if (activity.type == "PushEvent") {
@@ -219,4 +233,13 @@ function findTime(timestamp) {
     return `${months} months ago `;
   }
   return `a year ago`;
+}
+
+// Filter Activities
+function filterActivities() {
+  var filterData = document.getElementsByClassName("option");
+  for (filter of filterData) {
+    filterValues[filter.value] = filter.checked;
+  }
+  console.log(filterValues);
 }

@@ -170,6 +170,10 @@ a {
   margin-left: 10px;
 }
 
+#filter-section {
+  visibility: hidden;
+}
+
 .panel {
   background-color: white;
   max-height: 0;
