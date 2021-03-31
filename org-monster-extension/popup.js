@@ -1,4 +1,5 @@
 var allActivities = [];
+var filterValues = {};
 
 // Getting all Stored Organisations
 chrome.storage.sync.get(["org"], function (res) {
@@ -12,6 +13,25 @@ chrome.storage.sync.get(["org"], function (res) {
     fetchActivities(temp[i]);
   }
 });
+
+var acc = document.getElementsByClassName("accordion");
+acc[0].addEventListener("click", function () {
+  this.classList.toggle("active");
+  var panel = this.nextElementSibling;
+  if (panel.style.maxHeight) {
+    panel.style.maxHeight = null;
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+  }
+});
+
+function send() {
+  var filterData = document.getElementsByClassName("option");
+  for (filter of filterData) {
+    filterValues[filter.value] = filter.checked;
+  }
+  console.log(filterValues);
+}
 
 // FUNCTION DEFINITIONS
 

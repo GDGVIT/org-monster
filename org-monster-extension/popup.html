@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
     <title>View Feed</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -24,10 +24,37 @@
     </ul>
     <div class="outer-div">
         <div class="tab-body">
-            <div class="heading">
-                <h4>Org Monster</h4>
+            <div class="container top-padding">
+                <button class="accordion" type="submit" onclick="send();">Filter by ...</button>
+                <div class="panel">
+                    <div class="filter-content">
+                        <h6>Org name</h6>
+                        <div class="org-filter">
+                            <label class="checkbox-container">Google
+                                <input type="checkbox" checked="checked" value="google" name="option" class="option">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">Facebook
+                                <input type="checkbox" checked="checked" value="facebook" name="option" class="option">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <h6>Activity Type</h6>
+                        <div class="activity-filter">
+
+                            <label class="checkbox-container">Commit
+                                <input type="checkbox" checked="checked" value="commit" name="option2" class="option">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">Fork
+                                <input type="checkbox" checked="checked" value="fork" name="option3" class="option">
+                                <span class="checkmark"></span>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <hr>
             <div id="activites" class="container">
                 <div id="emptyMsg"></div>
             </div>
