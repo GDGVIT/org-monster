@@ -17,6 +17,7 @@ chrome.storage.sync.get(["org"], function (res) {
     document.getElementById("filter-section").style.visibility = "hidden";
     document.getElementById("emptyMsg").innerHTML =
       "Follow GitHub Organisations <br/>Add Organisations in Manage Section!";
+    showPage();
   } else {
     document.getElementById("filter-section").style.visibility = "visible";
     var orgfilter = document.getElementsByClassName("org-filter")[0];
@@ -24,7 +25,9 @@ chrome.storage.sync.get(["org"], function (res) {
       fetchActivities(temp[i]);
       filterValues[temp[i].toLowerCase()] = true;
       var content = `<label class="checkbox-container">${temp[i]}
-      <input type="checkbox" checked="checked" value="${temp[i]}" class="option">
+      <input type="checkbox" checked="checked" value="${temp[
+        i
+      ].toLowerCase()}" class="option">
       <span class="checkmark"></span>
       </label>`;
       orgfilter.innerHTML += content;
@@ -45,6 +48,17 @@ acc[0].addEventListener("click", function () {
 });
 
 // FUNCTION DEFINITIONS
+
+// Loader Functions
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("activity-content").style.display = "block";
+}
+
+function showLoader() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("activity-content").style.display = "block";
+}
 
 // Fetching all activity for an org
 function fetchActivities(orgName) {
@@ -214,6 +228,7 @@ function showActivityList() {
       activityDiv.innerHTML += `<div class="activity-box">${content}</div>`;
     }
   }
+  showPage();
 }
 
 // Finding Time
@@ -243,5 +258,6 @@ function filterActivities() {
     filterValues[filter.value] = filter.checked;
   }
   console.log(filterValues);
+  showLoader();
   showActivityList();
 }

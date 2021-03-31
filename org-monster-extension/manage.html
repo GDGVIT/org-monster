@@ -24,20 +24,23 @@
     </ul>
     <div class="outer-div">
         <div class="tab-body">
-            <div class="container mt-3">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Enter Organisation Name" id="orgName"
-                        name="orgName" autocomplete="off">
-                    <div class="input-group-append">
-                        <button class="btn btn-success" type="submit" id="addOrg">+</button>
+            <div id="loader"></div>
+            <div id="activity-content" class="animate-bottom">
+                <div class="container mt-3">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enter Organisation Name" id="orgName"
+                            name="orgName" autocomplete="off">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="submit" id="addOrg">+</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="container">
-                <div id="emptyMsg"></div>
-                <ul class="org-list" id="orgsList"></ul>
+                <div class="container">
+                    <div id="emptyMsg"></div>
+                    <ul class="org-list" id="orgsList"></ul>
+                </div>
             </div>
         </div>
     </div>
