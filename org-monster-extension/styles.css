@@ -1,6 +1,6 @@
 @font-face {
   font-family: Avenir;
-  src: url("./AvenirLTStd-Medium.ttf");
+  src: url("./asset/AvenirLTStd-Medium.ttf");
 }
 
 body,
@@ -187,7 +187,7 @@ a {
 }
 
 .accordion:after {
-  content: "\f106";
+  content: "\f107";
   font-size: 18px;
   color: #434184;
   float: right;
@@ -198,7 +198,7 @@ a {
 }
 
 button.active:after {
-  content: "\f107";
+  content: "\f106";
   font-family: "FontAwesome";
 }
 
