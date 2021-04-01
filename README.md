@@ -13,9 +13,11 @@
 
 ## Functionalities
 
-- [X] Keep track of organisations you are following
-- [X] View all the activities of the organisation
-- [X] Remove following organisations
+- [x] Keep track of organisations you are following
+- [x] View all the activities of the organisation
+- [x] Remove following organisations
+- [x] Filter activities based on organisation
+- [x] Filter the organisation activity based on activity or event type
 - [ ] RSS Feed for following GitHub orgs
 
 <br>

@@ -8,6 +8,12 @@
     "default_popup": "popup.html"
   },
 
+  "icons":{
+    "16": "asset/icon16.png",
+    "48": "asset/icon48.png",
+    "128":"asset/icon128.png"
+  },
+
   "permissions": [
     "storage"
   ]

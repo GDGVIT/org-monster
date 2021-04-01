@@ -40,9 +40,21 @@ chrome.storage.sync.get(["org"], function (res) {
     document.getElementById("emptyMsg").innerHTML =
       "Click on + to follow GitHub Organisations! <br/>";
   }
+  showPage();
 });
 
 // FUNCTION DEFINITIONS
+
+// Loader Functions
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("activity-content").style.display = "block";
+}
+
+function showLoader() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("activity-content").style.display = "block";
+}
 
 // Adding Closing action to cross buttons
 function addcloseEventListener() {

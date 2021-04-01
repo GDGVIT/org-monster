@@ -2,32 +2,85 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
     <title>View Feed</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
+    <div>
+        <img src="asset/Logo.svg" alt="org monster" class="logo">
+    </div>
+
     <ul class="nav nav-tabs">
         <li class="nav-item custom-tab">
-            <a class="nav-link active" href="popup.html">Your Feed</a>
+            <a class="nav-link active border border-bottom-0" href="popup.html">Your Feed</a>
         </li>
         <li class="nav-item custom-tab">
-            <a class="nav-link" href="manage.html">Manage Orgs</a>
+            <a class="nav-link border non-active" href="manage.html">Manage Orgs</a>
         </li>
     </ul>
 
-    <div>
-        <div class="heading">
-            <h4>Org Monster</h4>
+
+
+    <div class="outer-div">
+        <div class="tab-body">
+            <div id="loader"></div>
+            <div id="activity-content" class="animate-bottom">
+                <div class="container top-padding" id="filter-section">
+                    <button class="accordion" type="submit">Filter by ...</button>
+                    <div class="panel">
+                        <div class="filter-content">
+                            <h6>Org name</h6>
+                            <div class="org-filter">
+                            </div>
+                            <h6>Activity Type</h6>
+                            <div class="activity-filter">
+                                <label class="checkbox-container">Commit Push
+                                    <input type="checkbox" checked="checked" value="PushEvent" class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="checkbox-container">Pull Request
+                                    <input type="checkbox" checked="checked" value="PullRequestEvent" class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="checkbox-container">Fork
+                                    <input type="checkbox" checked="checked" value="ForkEvent" class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="checkbox-container">Branch or Tag Created
+                                    <input type="checkbox" checked="checked" value="CreateEvent" class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="checkbox-container">Issues
+                                    <input type="checkbox" checked="checked" value="IssuesEvent" class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="checkbox-container">Branch or Tag Deleted
+                                    <input type="checkbox" checked="checked" value="DeleteEvent" class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="checkbox-container">Issue Comment
+                                    <input type="checkbox" checked="checked" value="IssueCommentEvent" class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="checkbox-container">Pull Request Comment
+                                    <input type="checkbox" checked="checked" value="PullRequestReviewCommentEvent"
+                                        class="option">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="activites" class="container">
+                    <div id="emptyMsg"></div>
+                </div>
+                <script src="scripts/popup.js"></script>
+            </div>
         </div>
-        <hr>
-        <div id="activites" class="container">
-            <div id="emptyMsg"></div>
-        </div>
-        <script src="popup.js"></script>
     </div>
 </body>
 
